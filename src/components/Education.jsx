@@ -33,6 +33,7 @@ export default function Education(props) {
   const [degreeWarning, setDegreeWarning] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState();
+  const [degreesList, setDegreesList] = useState([]);
   const [selectedDegree, setSelectedDegree] = useState(
     JSON.parse(localStorage.getItem("selectedDegrees")) || [
       {
@@ -191,6 +192,26 @@ export default function Education(props) {
     ]);
     setSelectedDegree([...selectedDegree, { id: Date.now(), degree: "" }]);
   };
+
+  useEffect(() => {
+    const storedSelectedDegrees = localStorage.getItem("selectedDegrees");
+    if (storedSelectedDegrees) {
+      setSelectedDegree(storedSelectedDegrees);
+    }
+
+    const storedDegreeList = localStorage.getItem("degreeList");
+
+    if (storedDegreeList) {
+      setDegreesList(JSON.parse(storedDegreeList));
+    } else {
+      axios
+        .get("https://resume.redberryinternship.ge/api/degrees")
+        .then((response) => {
+          setDegreesList(response.data);
+          localStorage.setItem("degreeList", JSON.stringify(response.data));
+        });
+    }
+  }, []);
 
   return (
     <Container>
