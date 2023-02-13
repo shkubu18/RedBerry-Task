@@ -26,7 +26,7 @@ export default function Resume(props) {
   const storedEmail = localStorage.getItem("email");
   const storedPhone = localStorage.getItem("phone_number");
 
-  let storagedformData = JSON.parse(localStorage.getItem("formData"));
+  let storagedFormData = JSON.parse(localStorage.getItem("formData"));
   let storagedEduFormData = JSON.parse(localStorage.getItem("eduFormData"));
 
   return (
@@ -88,28 +88,52 @@ export default function Resume(props) {
             </div>
           </PersonalInfoSection>
         ) : null}
-
-        {storagedformData ? (
+        {storagedFormData ? (
           <ExperienceSection>
-            <SectionHeadings
-              style={{
-                display: storagedformData[0].position !== "" ? "block" : "none",
-              }}
-            >
-              გამოცდილება
-            </SectionHeadings>
+            {storagedFormData.map((form, index) => (
+              <SectionHeadings
+                key={index}
+                style={{
+                  display:
+                    storagedFormData[index].position !== "" ||
+                    storagedFormData[index].employer !== "" ||
+                    storagedFormData[index].start_date !== "" ||
+                    storagedFormData[index].due_date !== "" ||
+                    storagedFormData[index].description !== ""
+                      ? "block"
+                      : "none",
+                }}
+              >
+                გამოცდილება
+              </SectionHeadings>
+            ))}
             {window.location.pathname === "/experience"
               ? formData.map((form) => (
                   <div
                     key={form.id}
                     style={{
                       marginBottom: 20,
-                      display: form.position !== "" ? "block" : "none",
                       borderBottom: "1px solid #C8C8C8",
+                      display:
+                        form.position !== "" ||
+                        form.employer !== "" ||
+                        form.start_date !== "" ||
+                        form.due_date !== "" ||
+                        form.description !== ""
+                          ? "block"
+                          : "none",
                       paddingBottom: 20,
                     }}
                   >
-                    <h3 style={{ fontSize: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        display:
+                          form.position !== "" || form.employer !== ""
+                            ? "block"
+                            : "none",
+                      }}
+                    >
                       {form.position + ","} {form.employer}
                     </h3>
                     <div style={{ display: "flex", marginTop: 7 }}>
@@ -125,17 +149,32 @@ export default function Resume(props) {
                     <p style={{ marginTop: 15 }}>{form.description}</p>
                   </div>
                 ))
-              : storagedformData.map((form) => (
+              : storagedFormData.map((form) => (
                   <div
                     key={form.id}
                     style={{
                       marginBottom: 20,
-                      display: form.position !== "" ? "block" : "none",
+                      display:
+                        form.position !== "" ||
+                        form.employer !== "" ||
+                        form.start_date !== "" ||
+                        form.due_date !== "" ||
+                        form.description !== ""
+                          ? "block"
+                          : "none",
                       borderBottom: "1px solid #C8C8C8",
                       paddingBottom: 20,
                     }}
                   >
-                    <h3 style={{ fontSize: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        display:
+                          form.position !== "" || form.employer !== ""
+                            ? "block"
+                            : "none",
+                      }}
+                    >
                       {form.position + ","} {form.employer}
                     </h3>
                     <div style={{ display: "flex", marginTop: 7 }}>
@@ -155,26 +194,48 @@ export default function Resume(props) {
         ) : null}
         {storagedEduFormData ? (
           <EducationSection>
-            <SectionHeadings
-              style={{
-                display:
-                  storagedEduFormData[0].institute !== "" ? "block" : "none",
-              }}
-            >
-              განათლება
-            </SectionHeadings>
+            {storagedEduFormData.map((form, index) => (
+              <SectionHeadings
+                key={index}
+                style={{
+                  display:
+                    storagedEduFormData[index].institute !== "" ||
+                    storagedEduFormData[index].degree_id !== "" ||
+                    storagedEduFormData[index].due_date !== "" ||
+                    storagedEduFormData[index].description !== ""
+                      ? "block"
+                      : "none",
+                }}
+              >
+                გამოცდილება
+              </SectionHeadings>
+            ))}
             {window.location.pathname === "/education"
               ? eduFormData.map((form, index) => (
                   <div
                     key={form.id}
                     style={{
                       marginBottom: 20,
-                      display: form.institute !== "" ? "block" : "none",
+                      display:
+                        form.institute !== "" ||
+                        form.degree_id !== "" ||
+                        form.due_date !== "" ||
+                        form.description !== ""
+                          ? "block"
+                          : "none",
                       borderBottom: "1px solid #C8C8C8",
                       paddingBottom: 20,
                     }}
                   >
-                    <h3 style={{ fontSize: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        display:
+                          form.institute !== "" || form.degree_id !== ""
+                            ? "block"
+                            : "none",
+                      }}
+                    >
                       {form.institute + ","} {selectedDegree[index].degree}
                     </h3>
                     <div style={{ display: "flex", marginTop: 7 }}>
@@ -190,12 +251,26 @@ export default function Resume(props) {
                     key={form.id}
                     style={{
                       marginBottom: 20,
-                      display: form.institute !== "" ? "block" : "none",
+                      display:
+                        form.institute !== "" ||
+                        form.degree_id !== "" ||
+                        form.due_date !== "" ||
+                        form.description !== ""
+                          ? "block"
+                          : "none",
                       borderBottom: "1px solid #C8C8C8",
                       paddingBottom: 20,
                     }}
                   >
-                    <h3 style={{ fontSize: 16 }}>
+                    <h3
+                      style={{
+                        fontSize: 16,
+                        display:
+                          form.institute !== "" || form.degree_id !== ""
+                            ? "block"
+                            : "none",
+                      }}
+                    >
                       {form.institute + ","}{" "}
                       {storedSelectedDegrees[index].degree}
                     </h3>
