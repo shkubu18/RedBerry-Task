@@ -13,12 +13,15 @@ export default function Resume(props) {
     phone,
     formData,
     eduFormData,
+    selectedDegree,
   } = props;
 
   const storedName = localStorage.getItem("name");
   const storedSurname = localStorage.getItem("surname");
   const storedPicture = localStorage.getItem("storedImage");
-  const storedSelectedDegree = localStorage.getItem("selectedDegree");
+  const storedSelectedDegrees = JSON.parse(
+    localStorage.getItem("selectedDegrees")
+  );
   const storedAboutme = localStorage.getItem("about_me");
   const storedEmail = localStorage.getItem("email");
   const storedPhone = localStorage.getItem("phone_number");
@@ -161,7 +164,7 @@ export default function Resume(props) {
               განათლება
             </SectionHeadings>
             {window.location.pathname === "/education"
-              ? eduFormData.map((form) => (
+              ? eduFormData.map((form, index) => (
                   <div
                     key={form.id}
                     style={{
@@ -172,7 +175,7 @@ export default function Resume(props) {
                     }}
                   >
                     <h3 style={{ fontSize: 16 }}>
-                      {form.institute + ","} {storedSelectedDegree}
+                      {form.institute + ","} {selectedDegree[index].degree}
                     </h3>
                     <div style={{ display: "flex", marginTop: 7 }}>
                       <span style={{ fontSize: 16, opacity: 0.5 }}>
@@ -182,7 +185,7 @@ export default function Resume(props) {
                     <p style={{ marginTop: 15 }}>{form.description}</p>
                   </div>
                 ))
-              : storagedEduFormData.map((form) => (
+              : storagedEduFormData.map((form, index) => (
                   <div
                     key={form.id}
                     style={{
@@ -193,7 +196,8 @@ export default function Resume(props) {
                     }}
                   >
                     <h3 style={{ fontSize: 16 }}>
-                      {form.institute + ","} {storedSelectedDegree}
+                      {form.institute + ","}{" "}
+                      {storedSelectedDegrees[index].degree}
                     </h3>
                     <div style={{ display: "flex", marginTop: 7 }}>
                       <span style={{ fontSize: 16, opacity: 0.5 }}>
