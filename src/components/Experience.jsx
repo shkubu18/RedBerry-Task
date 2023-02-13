@@ -246,6 +246,509 @@ export default function Experience(props) {
     setFormData(newFormData);
   };
 
+  const handleNextPageClick = () => {
+    const formData = JSON.parse(localStorage.getItem("formData"));
+
+    // for position input
+
+    if (localStorage.getItem("positionValidated")) {
+      const positionInputsInfo = JSON.parse(
+        localStorage.getItem("positionValidated")
+      );
+      Object.entries(positionInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setPositionWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (formData.length === 1) {
+      for (let $i = 0; $i < formData.length; $i++) {
+        if (formData[$i].position === "") {
+          setPositionWarning((prevState) => ({
+            ...prevState,
+            [`position${formData[$i].id}`]: true,
+          }));
+
+          const positionInputsInfo =
+            JSON.parse(localStorage.getItem("positionValidated")) || {};
+          positionInputsInfo[`position${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "positionValidated",
+            JSON.stringify(positionInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (formData[$i].position === "") {
+          setPositionWarning((prevState) => ({
+            ...prevState,
+            [`position${formData[$i].id}`]: true,
+          }));
+
+          const positionInputsInfo =
+            JSON.parse(localStorage.getItem("positionValidated")) || {};
+          positionInputsInfo[`position${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "positionValidated",
+            JSON.stringify(positionInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < formData.length; $i++) {
+        if (
+          formData[$i].position === "" &&
+          formData[$i].employer === "" &&
+          formData[$i].description === "" &&
+          formData[$i].start_date === "" &&
+          formData[$i].due_date === ""
+        ) {
+          setPositionWarning((prevState) => ({
+            ...prevState,
+            [`position${formData[$i].id}`]: false,
+          }));
+
+          const positionInputsInfo =
+            JSON.parse(localStorage.getItem("positionValidated")) || {};
+          positionInputsInfo[`position${formData[$i].id}`] = true;
+          localStorage.setItem(
+            "positionValidated",
+            JSON.stringify(positionInputsInfo)
+          );
+        } else {
+          if (formData[$i].position === "") {
+            setPositionWarning((prevState) => ({
+              ...prevState,
+              [`position${formData[$i].id}`]: true,
+            }));
+
+            const positionInputsInfo =
+              JSON.parse(localStorage.getItem("positionValidated")) || {};
+            positionInputsInfo[`position${formData[$i].id}`] = false;
+            localStorage.setItem(
+              "positionValidated",
+              JSON.stringify(positionInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for employer input
+
+    if (localStorage.getItem("employerValidated")) {
+      const employerInputsInfo = JSON.parse(
+        localStorage.getItem("employerValidated")
+      );
+      Object.entries(employerInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setEmployerWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (formData.length === 1) {
+      for (let $i = 0; $i < formData.length; $i++) {
+        if (formData[$i].employer === "") {
+          setEmployerWarning((prevState) => ({
+            ...prevState,
+            [`employer${formData[$i].id}`]: true,
+          }));
+
+          const employerInputsInfo =
+            JSON.parse(localStorage.getItem("employerValidated")) || {};
+          employerInputsInfo[`employer${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "employerValidated",
+            JSON.stringify(employerInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (formData[$i].employer === "") {
+          setEmployerWarning((prevState) => ({
+            ...prevState,
+            [`employer${formData[$i].id}`]: true,
+          }));
+
+          const employerInputsInfo =
+            JSON.parse(localStorage.getItem("employerValidated")) || {};
+          employerInputsInfo[`employer${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "employerValidated",
+            JSON.stringify(employerInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < formData.length; $i++) {
+        if (
+          formData[$i].position === "" &&
+          formData[$i].employer === "" &&
+          formData[$i].description === "" &&
+          formData[$i].start_date === "" &&
+          formData[$i].due_date === ""
+        ) {
+          setEmployerWarning((prevState) => ({
+            ...prevState,
+            [`employer${formData[$i].id}`]: false,
+          }));
+
+          const employerInputsInfo =
+            JSON.parse(localStorage.getItem("employerValidated")) || {};
+          employerInputsInfo[`employer${formData[$i].id}`] = true;
+          localStorage.setItem(
+            "employerValidated",
+            JSON.stringify(employerInputsInfo)
+          );
+        } else {
+          if (formData[$i].employer === "") {
+            setEmployerWarning((prevState) => ({
+              ...prevState,
+              [`employer${formData[$i].id}`]: true,
+            }));
+
+            const employerInputsInfo =
+              JSON.parse(localStorage.getItem("employerValidated")) || {};
+            employerInputsInfo[`employer${formData[$i].id}`] = false;
+            localStorage.setItem(
+              "employerValidated",
+              JSON.stringify(employerInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for startDate input
+
+    if (localStorage.getItem("startDateValidated")) {
+      const startDateInputsInfo = JSON.parse(
+        localStorage.getItem("startDateValidated")
+      );
+      Object.entries(startDateInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setStartDateWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (formData.length === 1) {
+      for (let $i = 0; $i < formData.length; $i++) {
+        if (formData[$i].start_date === "") {
+          setStartDateWarning((prevState) => ({
+            ...prevState,
+            [`startdate${formData[$i].id}`]: true,
+          }));
+
+          const startDateInputsInfo =
+            JSON.parse(localStorage.getItem("startDateValidated")) || {};
+          startDateInputsInfo[`startdate${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "startDateValidated",
+            JSON.stringify(startDateInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (formData[$i].start_date === "") {
+          setStartDateWarning((prevState) => ({
+            ...prevState,
+            [`startdate${formData[$i].id}`]: true,
+          }));
+
+          const startDateInputsInfo =
+            JSON.parse(localStorage.getItem("startDateValidated")) || {};
+          startDateInputsInfo[`startdate${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "startDateValidated",
+            JSON.stringify(startDateInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < formData.length; $i++) {
+        if (
+          formData[$i].position === "" &&
+          formData[$i].employer === "" &&
+          formData[$i].description === "" &&
+          formData[$i].start_date === "" &&
+          formData[$i].due_date === ""
+        ) {
+          setStartDateWarning((prevState) => ({
+            ...prevState,
+            [`startdate${formData[$i].id}`]: false,
+          }));
+
+          const startDateInputsInfo =
+            JSON.parse(localStorage.getItem("startDateValidated")) || {};
+          startDateInputsInfo[`startdate${formData[$i].id}`] = true;
+          localStorage.setItem(
+            "startDateValidated",
+            JSON.stringify(startDateInputsInfo)
+          );
+        } else {
+          if (formData[$i].start_date === "") {
+            setStartDateWarning((prevState) => ({
+              ...prevState,
+              [`startdate${formData[$i].id}`]: true,
+            }));
+
+            const startDateInputsInfo =
+              JSON.parse(localStorage.getItem("startDateValidated")) || {};
+            startDateInputsInfo[`startdate${formData[$i].id}`] = false;
+            localStorage.setItem(
+              "startDateValidated",
+              JSON.stringify(startDateInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for endDate input
+
+    if (localStorage.getItem("endDateValidated")) {
+      const endDateInputsInfo = JSON.parse(
+        localStorage.getItem("endDateValidated")
+      );
+      Object.entries(endDateInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setEndDateWarning((prevState) => ({ ...prevState, [inputId]: true }));
+        }
+      });
+    }
+
+    if (formData.length === 1) {
+      for (let $i = 0; $i < formData.length; $i++) {
+        if (formData[$i].due_date === "") {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`enddate${formData[$i].id}`]: true,
+          }));
+
+          const endDateInputsInfo =
+            JSON.parse(localStorage.getItem("endDateValidated")) || {};
+          endDateInputsInfo[`enddate${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "endDateValidated",
+            JSON.stringify(endDateInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (formData[$i].due_date === "") {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`enddate${formData[$i].id}`]: true,
+          }));
+
+          const endDateInputsInfo =
+            JSON.parse(localStorage.getItem("endDateValidated")) || {};
+          endDateInputsInfo[`enddate${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "endDateValidated",
+            JSON.stringify(endDateInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < formData.length; $i++) {
+        if (
+          formData[$i].position === "" &&
+          formData[$i].employer === "" &&
+          formData[$i].description === "" &&
+          formData[$i].start_date === "" &&
+          formData[$i].due_date === ""
+        ) {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`enddate${formData[$i].id}`]: false,
+          }));
+
+          const endDateInputsInfo =
+            JSON.parse(localStorage.getItem("endDateValidated")) || {};
+          endDateInputsInfo[`enddate${formData[$i].id}`] = true;
+          localStorage.setItem(
+            "endDateValidated",
+            JSON.stringify(endDateInputsInfo)
+          );
+        } else {
+          if (formData[$i].due_date === "") {
+            setEndDateWarning((prevState) => ({
+              ...prevState,
+              [`enddate${formData[$i].id}`]: true,
+            }));
+
+            const endDateInputsInfo =
+              JSON.parse(localStorage.getItem("endDateValidated")) || {};
+            endDateInputsInfo[`enddate${formData[$i].id}`] = false;
+            localStorage.setItem(
+              "endDateValidated",
+              JSON.stringify(endDateInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for description input
+
+    if (localStorage.getItem("descriptionValidated")) {
+      const descriptionInputsInfo = JSON.parse(
+        localStorage.getItem("descriptionValidated")
+      );
+      Object.entries(descriptionInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (formData.length === 1) {
+      for (let $i = 0; $i < formData.length; $i++) {
+        if (formData[$i].description === "") {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`description${formData[$i].id}`]: true,
+          }));
+
+          const descriptionInputsInfo =
+            JSON.parse(localStorage.getItem("descriptionValidated")) || {};
+          descriptionInputsInfo[`description${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "descriptionValidated",
+            JSON.stringify(descriptionInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (formData[$i].description === "") {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`description${formData[$i].id}`]: true,
+          }));
+
+          const descriptionInputsInfo =
+            JSON.parse(localStorage.getItem("descriptionValidated")) || {};
+          descriptionInputsInfo[`description${formData[$i].id}`] = false;
+          localStorage.setItem(
+            "descriptionValidated",
+            JSON.stringify(descriptionInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < formData.length; $i++) {
+        if (
+          formData[$i].position === "" &&
+          formData[$i].employer === "" &&
+          formData[$i].description === "" &&
+          formData[$i].start_date === "" &&
+          formData[$i].due_date === ""
+        ) {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`description${formData[$i].id}`]: false,
+          }));
+
+          const descriptionInputsInfo =
+            JSON.parse(localStorage.getItem("descriptionValidated")) || {};
+          descriptionInputsInfo[`description${formData[$i].id}`] = true;
+          localStorage.setItem(
+            "descriptionValidated",
+            JSON.stringify(descriptionInputsInfo)
+          );
+        } else {
+          if (formData[$i].description === "") {
+            setDescriptionWarning((prevState) => ({
+              ...prevState,
+              [`description${formData[$i].id}`]: true,
+            }));
+
+            const descriptionInputsInfo =
+              JSON.parse(localStorage.getItem("descriptionValidated")) || {};
+            descriptionInputsInfo[`description${formData[$i].id}`] = false;
+            localStorage.setItem(
+              "descriptionValidated",
+              JSON.stringify(descriptionInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    const descriptionInputsInfo = JSON.parse(
+      localStorage.getItem("descriptionValidated")
+    );
+    const endDateInputsInfo = JSON.parse(
+      localStorage.getItem("endDateValidated")
+    );
+    const startDateInputsInfo = JSON.parse(
+      localStorage.getItem("startDateValidated")
+    );
+    const employerInputsInfo = JSON.parse(
+      localStorage.getItem("employerValidated")
+    );
+    const positionInputsInfo = JSON.parse(
+      localStorage.getItem("positionValidated")
+    );
+    if (
+      descriptionInputsInfo &&
+      endDateInputsInfo &&
+      startDateInputsInfo &&
+      employerInputsInfo &&
+      positionInputsInfo
+    ) {
+      const allWarnings = [
+        descriptionInputsInfo,
+        endDateInputsInfo,
+        startDateInputsInfo,
+        employerInputsInfo,
+        positionInputsInfo,
+      ];
+      let hasWarnings = false;
+      for (const warning of allWarnings) {
+        if (Object.values(warning).includes(false)) {
+          hasWarnings = true;
+          break;
+        }
+      }
+
+      if (!hasWarnings) {
+        window.location.href = "/education";
+      }
+    }
+  };
+
   return (
     <Container>
       <ExperienceContainer>
