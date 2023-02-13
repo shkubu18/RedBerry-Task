@@ -255,6 +255,38 @@ export default function Education(props) {
     localStorage.setItem("degreeValidated", JSON.stringify(degreeInfo));
   };
 
+  const handleDegreeContainerClick = (id) => {
+    setIsOpen((prevState) => ({
+      ...prevState,
+      [`isOpen${id}`]: true,
+    }));
+
+    Object.entries(isOpen).forEach(([isOpenid, isOpen, index]) => {
+      if (isOpen) {
+        setIsOpen((prevState) => ({
+          ...prevState,
+          [isOpenid]: false,
+        }));
+      }
+      if (isOpen && !selectedDegree[index]) {
+        if (!selectedDegree[index]) {
+          setDegreeWarning((prevState) => ({
+            ...prevState,
+            [`degree${id}`]: true,
+          }));
+          setIsDegreeValidated((prevState) => ({
+            ...prevState,
+            [`degree${id}`]: false,
+          }));
+          const degreeInfo =
+            JSON.parse(localStorage.getItem("degreeValidated")) || {};
+          degreeInfo[`degree${id}`] = false;
+          localStorage.setItem("degreeValidated", JSON.stringify(degreeInfo));
+        }
+      }
+    });
+  };
+
   return (
     <Container>
       <EducationContainer>
