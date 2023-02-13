@@ -213,6 +213,16 @@ export default function Education(props) {
     }
   }, []);
 
+  useEffect(() => {
+    const image = localStorage.getItem("image");
+    fetch(image)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], "edited.jpeg", { type: "image/jpeg" });
+        setFile(file);
+      });
+  }, []);
+
   return (
     <Container>
       <EducationContainer>
