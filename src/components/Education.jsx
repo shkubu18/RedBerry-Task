@@ -287,6 +287,489 @@ export default function Education(props) {
     });
   };
 
+  const handleNextPageClick = () => {
+    const eduFormData = JSON.parse(localStorage.getItem("eduFormData"));
+
+    // for education input
+
+    if (localStorage.getItem("educationValidated")) {
+      const educationInputsInfo = JSON.parse(
+        localStorage.getItem("educationValidated")
+      );
+      Object.entries(educationInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setEducationWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (eduFormData.length === 1) {
+      for (let $i = 0; $i < eduFormData.length; $i++) {
+        if (eduFormData[$i].institute === "") {
+          setEducationWarning((prevState) => ({
+            ...prevState,
+            [`education${eduFormData[$i].id}`]: true,
+          }));
+
+          const educationInputsInfo =
+            JSON.parse(localStorage.getItem("educationValidated")) || {};
+          educationInputsInfo[`education${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "educationValidated",
+            JSON.stringify(educationInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (eduFormData[$i].institute === "") {
+          setEducationWarning((prevState) => ({
+            ...prevState,
+            [`education${eduFormData[$i].id}`]: true,
+          }));
+
+          const educationInputsInfo =
+            JSON.parse(localStorage.getItem("educationValidated")) || {};
+          educationInputsInfo[`education${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "educationValidated",
+            JSON.stringify(educationInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < eduFormData.length; $i++) {
+        if (
+          eduFormData[$i].degree_id === "" &&
+          eduFormData[$i].due_date === "" &&
+          eduFormData[$i].description === "" &&
+          eduFormData[$i].institute === ""
+        ) {
+          setEducationWarning((prevState) => ({
+            ...prevState,
+            [`education${eduFormData[$i].id}`]: false,
+          }));
+
+          const educationInputsInfo =
+            JSON.parse(localStorage.getItem("educationValidated")) || {};
+          educationInputsInfo[`education${eduFormData[$i].id}`] = true;
+          localStorage.setItem(
+            "educationValidated",
+            JSON.stringify(educationInputsInfo)
+          );
+        } else {
+          if (eduFormData[$i].institute === "") {
+            setEducationWarning((prevState) => ({
+              ...prevState,
+              [`education${eduFormData[$i].id}`]: true,
+            }));
+
+            const educationInputsInfo =
+              JSON.parse(localStorage.getItem("educationValidated")) || {};
+            educationInputsInfo[`education${eduFormData[$i].id}`] = false;
+            localStorage.setItem(
+              "educationValidated",
+              JSON.stringify(educationInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for degree
+
+    if (localStorage.getItem("degreeValidated")) {
+      const degreesInfo = JSON.parse(localStorage.getItem("degreeValidated"));
+      Object.entries(degreesInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setDegreeWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (eduFormData.length === 1) {
+      for (let $i = 0; $i < eduFormData.length; $i++) {
+        if (eduFormData[$i].degree_id === "") {
+          setDegreeWarning((prevState) => ({
+            ...prevState,
+            [`degree${eduFormData[$i].id}`]: true,
+          }));
+
+          const degreeInputsInfo =
+            JSON.parse(localStorage.getItem("degreeValidated")) || {};
+          degreeInputsInfo[`degree${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "degreeValidated",
+            JSON.stringify(degreeInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (eduFormData[$i].degree_id === "") {
+          setDegreeWarning((prevState) => ({
+            ...prevState,
+            [`degree${eduFormData[$i].id}`]: true,
+          }));
+
+          const degreeInputsInfo =
+            JSON.parse(localStorage.getItem("degreeValidated")) || {};
+          degreeInputsInfo[`degree${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "degreeValidated",
+            JSON.stringify(degreeInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < eduFormData.length; $i++) {
+        if (
+          eduFormData[$i].degree_id === "" &&
+          eduFormData[$i].due_date === "" &&
+          eduFormData[$i].description === "" &&
+          eduFormData[$i].institute === ""
+        ) {
+          setDegreeWarning((prevState) => ({
+            ...prevState,
+            [`degree${eduFormData[$i].id}`]: false,
+          }));
+
+          const degreeInputsInfo =
+            JSON.parse(localStorage.getItem("degreeValidated")) || {};
+          degreeInputsInfo[`degree${eduFormData[$i].id}`] = true;
+          localStorage.setItem(
+            "degreeValidated",
+            JSON.stringify(degreeInputsInfo)
+          );
+        } else {
+          if (eduFormData[$i].degree_id === "") {
+            setDegreeWarning((prevState) => ({
+              ...prevState,
+              [`degree${eduFormData[$i].id}`]: true,
+            }));
+
+            const degreeInputsInfo =
+              JSON.parse(localStorage.getItem("degreeValidated")) || {};
+            degreeInputsInfo[`degree${eduFormData[$i].id}`] = false;
+            localStorage.setItem(
+              "degreeValidated",
+              JSON.stringify(degreeInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for endDate input
+
+    if (localStorage.getItem("eduEndDateValidated")) {
+      const eduEndDateInputsInfo = JSON.parse(
+        localStorage.getItem("eduEndDateValidated")
+      );
+      Object.entries(eduEndDateInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (eduFormData.length === 1) {
+      for (let $i = 0; $i < eduFormData.length; $i++) {
+        if (eduFormData[$i].due_date === "") {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`eduEndDate${eduFormData[$i].id}`]: true,
+          }));
+
+          const eduEndDateInputsInfo =
+            JSON.parse(localStorage.getItem("eduEndDateValidated")) || {};
+          eduEndDateInputsInfo[`eduEndDate${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "eduEndDateValidated",
+            JSON.stringify(eduEndDateInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (eduFormData[$i].due_date === "") {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`eduEndDate${eduFormData[$i].id}`]: true,
+          }));
+
+          const eduEndDateInputsInfo =
+            JSON.parse(localStorage.getItem("eduEndDateValidated")) || {};
+          eduEndDateInputsInfo[`eduEndDate${eduFormData[$i].id}`] = false;
+          localStorage.setItem(
+            "eduEndDateValidated",
+            JSON.stringify(eduEndDateInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < eduFormData.length; $i++) {
+        if (
+          eduFormData[$i].degree_id === "" &&
+          eduFormData[$i].due_date === "" &&
+          eduFormData[$i].description === "" &&
+          eduFormData[$i].institute === ""
+        ) {
+          setEndDateWarning((prevState) => ({
+            ...prevState,
+            [`eduEndDate${eduFormData[$i].id}`]: false,
+          }));
+
+          const eduEndDateInputsInfo =
+            JSON.parse(localStorage.getItem("eduEndDateValidated")) || {};
+          eduEndDateInputsInfo[`eduEndDate${eduFormData[$i].id}`] = true;
+          localStorage.setItem(
+            "eduEndDateValidated",
+            JSON.stringify(eduEndDateInputsInfo)
+          );
+        } else {
+          if (eduFormData[$i].due_date === "") {
+            setEndDateWarning((prevState) => ({
+              ...prevState,
+              [`eduEndDate${eduFormData[$i].id}`]: true,
+            }));
+
+            const eduEndDateInputsInfo =
+              JSON.parse(localStorage.getItem("eduEndDateValidated")) || {};
+            eduEndDateInputsInfo[`eduEndDate${eduFormData[$i].id}`] = false;
+            localStorage.setItem(
+              "eduEndDateValidated",
+              JSON.stringify(eduEndDateInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    // for eduDescription input
+
+    if (localStorage.getItem("eduDescriptionValidated")) {
+      const eduDescriptionInputsInfo = JSON.parse(
+        localStorage.getItem("eduDescriptionValidated")
+      );
+      Object.entries(eduDescriptionInputsInfo).forEach(([inputId, isValid]) => {
+        if (!isValid) {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [inputId]: true,
+          }));
+        }
+      });
+    }
+
+    if (eduFormData.length === 1) {
+      for (let $i = 0; $i < eduFormData.length; $i++) {
+        if (eduFormData[$i].description === "") {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`eduDescription${eduFormData[$i].id}`]: true,
+          }));
+
+          const eduDescriptionInputsInfo =
+            JSON.parse(localStorage.getItem("eduDescriptionValidated")) || {};
+          eduDescriptionInputsInfo[
+            `eduDescription${eduFormData[$i].id}`
+          ] = false;
+          localStorage.setItem(
+            "eduDescriptionValidated",
+            JSON.stringify(eduDescriptionInputsInfo)
+          );
+        }
+      }
+    } else {
+      // check first form
+      for (let $i = 0; $i < 1; $i++) {
+        if (eduFormData[$i].description === "") {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`eduDescription${eduFormData[$i].id}`]: true,
+          }));
+
+          const eduDescriptionInputsInfo =
+            JSON.parse(localStorage.getItem("eduDescriptionValidated")) || {};
+          eduDescriptionInputsInfo[
+            `eduDescription${eduFormData[$i].id}`
+          ] = false;
+          localStorage.setItem(
+            "eduDescriptionValidated",
+            JSON.stringify(eduDescriptionInputsInfo)
+          );
+        }
+      }
+
+      // check others
+      for (let $i = 1; $i < eduFormData.length; $i++) {
+        if (
+          eduFormData[$i].degree_id === "" &&
+          eduFormData[$i].due_date === "" &&
+          eduFormData[$i].description === "" &&
+          eduFormData[$i].institute === ""
+        ) {
+          setDescriptionWarning((prevState) => ({
+            ...prevState,
+            [`eduDescription${eduFormData[$i].id}`]: false,
+          }));
+
+          const eduDescriptionInputsInfo =
+            JSON.parse(localStorage.getItem("eduDescriptionValidated")) || {};
+          eduDescriptionInputsInfo[
+            `eduDescription${eduFormData[$i].id}`
+          ] = true;
+          localStorage.setItem(
+            "eduDescriptionValidated",
+            JSON.stringify(eduDescriptionInputsInfo)
+          );
+        } else {
+          if (eduFormData[$i].description === "") {
+            setDescriptionWarning((prevState) => ({
+              ...prevState,
+              [`eduDescription${eduFormData[$i].id}`]: true,
+            }));
+
+            const eduDescriptionInputsInfo =
+              JSON.parse(localStorage.getItem("eduDescriptionValidated")) || {};
+            eduDescriptionInputsInfo[
+              `eduDescription${eduFormData[$i].id}`
+            ] = false;
+            localStorage.setItem(
+              "eduDescriptionValidated",
+              JSON.stringify(eduDescriptionInputsInfo)
+            );
+          }
+        }
+      }
+    }
+
+    const eduDescriptionInputsInfo = JSON.parse(
+      localStorage.getItem("eduDescriptionValidated")
+    );
+    const eduEndDateInputsInfo = JSON.parse(
+      localStorage.getItem("eduEndDateValidated")
+    );
+    const educationInputsInfo = JSON.parse(
+      localStorage.getItem("educationValidated")
+    );
+    const degreesInfo = JSON.parse(localStorage.getItem("degreeValidated"));
+
+    if (
+      eduDescriptionInputsInfo &&
+      eduEndDateInputsInfo &&
+      educationInputsInfo &&
+      degreesInfo
+    ) {
+      const allWarnings = [
+        eduDescriptionInputsInfo,
+        eduEndDateInputsInfo,
+        educationInputsInfo,
+        degreesInfo,
+      ];
+
+      let hasWarnings = false;
+      for (const warning of allWarnings) {
+        if (Object.values(warning).includes(false)) {
+          hasWarnings = true;
+          break;
+        }
+      }
+
+      if (!hasWarnings) {
+        const name = localStorage.getItem("name");
+        const surname = localStorage.getItem("surname");
+        const phone_number = localStorage
+          .getItem("phone_number")
+          .replace(/ /g, "");
+        const email = localStorage.getItem("email");
+        const about_me = localStorage.getItem("about_me");
+        const experiences = JSON.parse(localStorage.getItem("formData"));
+        const educations = JSON.parse(localStorage.getItem("eduFormData"));
+
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("surname", surname);
+        formData.append("email", email);
+        formData.append("phone_number", phone_number);
+        formData.append("about_me", about_me);
+        formData.append("image", file);
+
+        for (let i = 0; i < educations.length; i++) {
+          formData.append(
+            `educations[${i}][institute]`,
+            educations[i].institute
+          );
+          formData.append(
+            `educations[${i}][degree_id]`,
+            educations[i].degree_id
+          );
+          formData.append(`educations[${i}][due_date]`, educations[i].due_date);
+          formData.append(`educations[${i}][due_date]`, educations[i].due_date);
+          formData.append(
+            `educations[${i}][description]`,
+            educations[i].description
+          );
+        }
+
+        for (let i = 0; i < experiences.length; i++) {
+          formData.append(
+            `experiences[${i}][position]`,
+            experiences[i].position
+          );
+          formData.append(
+            `experiences[${i}][employer]`,
+            experiences[i].employer
+          );
+          formData.append(
+            `experiences[${i}][start_date]`,
+            experiences[i].start_date
+          );
+          formData.append(
+            `experiences[${i}][due_date]`,
+            experiences[i].due_date
+          );
+          formData.append(
+            `experiences[${i}][description]`,
+            experiences[i].description
+          );
+        }
+
+        axios
+          .post("https://resume.redberryinternship.ge/api/cvs", formData)
+          .then((response) => {
+            localStorage.clear();
+            localStorage.setItem(
+              "genereted_resume",
+              JSON.stringify(response.data)
+            );
+            window.location.href = "/generated-resume";
+          })
+          .catch((error) => {
+            if (error.response) {
+              console.log(error.response);
+            }
+          });
+      }
+    }
+  };
+
   return (
     <Container>
       <EducationContainer>
