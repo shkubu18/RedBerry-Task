@@ -936,7 +936,7 @@ export default function Education(props) {
           </Button>
         </div>
       </EducationContainer>
-      <Resume eduFormData={eduFormData} />
+      <Resume eduFormData={eduFormData} selectedDegree={selectedDegree} />
     </Container>
   );
 }
