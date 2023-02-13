@@ -90,23 +90,20 @@ export default function Resume(props) {
         ) : null}
         {storagedFormData ? (
           <ExperienceSection>
-            {storagedFormData.map((form, index) => (
-              <SectionHeadings
-                key={index}
-                style={{
-                  display:
-                    storagedFormData[index].position !== "" ||
-                    storagedFormData[index].employer !== "" ||
-                    storagedFormData[index].start_date !== "" ||
-                    storagedFormData[index].due_date !== "" ||
-                    storagedFormData[index].description !== ""
-                      ? "block"
-                      : "none",
-                }}
-              >
-                გამოცდილება
-              </SectionHeadings>
-            ))}
+            <SectionHeadings
+              style={{
+                display:
+                  storagedFormData[0].position !== "" ||
+                  storagedFormData[0].employer !== "" ||
+                  storagedFormData[0].start_date !== "" ||
+                  storagedFormData[0].due_date !== "" ||
+                  storagedFormData[0].description !== ""
+                    ? "block"
+                    : "none",
+              }}
+            >
+              გამოცდილება
+            </SectionHeadings>
             {window.location.pathname === "/experience"
               ? formData.map((form) => (
                   <div
@@ -194,22 +191,19 @@ export default function Resume(props) {
         ) : null}
         {storagedEduFormData ? (
           <EducationSection>
-            {storagedEduFormData.map((form, index) => (
-              <SectionHeadings
-                key={index}
-                style={{
-                  display:
-                    storagedEduFormData[index].institute !== "" ||
-                    storagedEduFormData[index].degree_id !== "" ||
-                    storagedEduFormData[index].due_date !== "" ||
-                    storagedEduFormData[index].description !== ""
-                      ? "block"
-                      : "none",
-                }}
-              >
-                გამოცდილება
-              </SectionHeadings>
-            ))}
+            <SectionHeadings
+              style={{
+                display:
+                  storagedEduFormData[0].institute !== "" ||
+                  storagedEduFormData[0].degree_id !== "" ||
+                  storagedEduFormData[0].due_date !== "" ||
+                  storagedEduFormData[0].description !== ""
+                    ? "block"
+                    : "none",
+              }}
+            >
+              გამოცდილება
+            </SectionHeadings>
             {window.location.pathname === "/education"
               ? eduFormData.map((form, index) => (
                   <div
