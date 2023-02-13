@@ -230,6 +230,31 @@ export default function Education(props) {
     }
   }, []);
 
+  const handleDegreeClick = (e, degreeId, id, degreeName) => {
+    setIsOpen(false);
+    const degreesIndex = selectedDegree.findIndex((degree) => degree.id === id);
+    const newSelectedDegrees = [...selectedDegree];
+    newSelectedDegrees[degreesIndex]["degree"] = degreeName;
+    setSelectedDegree(newSelectedDegrees);
+
+    const index = eduFormData.findIndex((form) => form.id === id);
+    const newFormData = [...eduFormData];
+    newFormData[index]["degree_id"] = degreeId;
+    setEduFormData(newFormData);
+
+    let inputId = e.target.id;
+    setIsDegreeValidated((prevState) => ({
+      ...prevState,
+      [inputId]: true,
+    }));
+    setDegreeWarning((prevState) => ({ ...prevState, [inputId]: false }));
+
+    const degreeInfo =
+      JSON.parse(localStorage.getItem("degreeValidated")) || {};
+    degreeInfo[inputId] = true;
+    localStorage.setItem("degreeValidated", JSON.stringify(degreeInfo));
+  };
+
   return (
     <Container>
       <EducationContainer>
