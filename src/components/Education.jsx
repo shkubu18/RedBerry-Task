@@ -223,6 +223,13 @@ export default function Education(props) {
       });
   }, []);
 
+  useEffect(() => {
+    const selectedDegrees = JSON.parse(localStorage.getItem("selectedDegrees"));
+    if (selectedDegrees) {
+      setSelectedDegree(selectedDegrees);
+    }
+  }, []);
+
   return (
     <Container>
       <EducationContainer>
