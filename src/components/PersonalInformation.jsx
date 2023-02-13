@@ -206,6 +206,54 @@ export default function PersonalInformation(props) {
     }
   }, []);
 
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    const nameValidated = localStorage.getItem("nameValidated");
+    const surnameValidated = localStorage.getItem("surnameValidated");
+    const pictureValidated = localStorage.getItem("pictureValidated");
+    const emailValidated = localStorage.getItem("emailValidated");
+    const phoneValidated = localStorage.getItem("phoneValidated");
+
+    if (nameValidated === "true") {
+      setIsNameValidated(true);
+    } else {
+      setNameWarning(true);
+    }
+
+    if (surnameValidated === "true") {
+      setIsSurnameValidated(true);
+    } else {
+      setSurnameWarning(true);
+    }
+
+    if (emailValidated === "true") {
+      setIsEmailValidated(true);
+    } else {
+      setEmailWarning(true);
+    }
+
+    if (phoneValidated === "true") {
+      setIsPhoneValidated(true);
+    } else {
+      setPhoneWarning(true);
+    }
+
+    if (!pictureValidated) {
+      setSelectedPictureWarning(true);
+    }
+
+    if (
+      nameValidated === "true" &&
+      surnameValidated === "true" &&
+      emailValidated === "true" &&
+      pictureValidated === "true" &&
+      phoneValidated === "true"
+    ) {
+      window.location.href = "/experience";
+    }
+  };
+
   return (
     <Container>
       <PersonalInfoContainer>
